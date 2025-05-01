@@ -1,14 +1,16 @@
-import express from 'express';
-import CodeSnippet from '../models/CodeSnippet.js';
+import express from "express";
+import CodeSnippet from "../models/CodeSnippet.js";
 
 const router = express.Router();
 
 // Get snippet by number
-router.get('/:number', async (req, res) => {
+router.get("/number/:number", async (req, res) => {
   try {
-    const snippet = await CodeSnippet.findOne({ snippetNumber: req.params.number });
+    const snippet = await CodeSnippet.findOne({
+      snippetNumber: req.params.number,
+    });
     if (!snippet) {
-      return res.status(404).json({ message: 'Snippet not found' });
+      return res.status(404).json({ message: "Snippet not found" });
     }
     res.json(snippet);
   } catch (error) {
@@ -17,12 +19,12 @@ router.get('/:number', async (req, res) => {
 });
 
 // Add new snippet (admin only)
-router.post('/', async (req, res) => {
+router.post("/upload", async (req, res) => {
   const snippet = new CodeSnippet({
     title: req.body.title,
     code: req.body.code,
     description: req.body.description,
-    snippetNumber: req.body.snippetNumber
+    snippetNumber: req.body.snippetNumber,
   });
 
   try {

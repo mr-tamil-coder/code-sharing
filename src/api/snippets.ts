@@ -8,7 +8,7 @@ export interface SnippetInput {
   description: string;
   code: string;
   language: string;
-  number: string;
+  snippetNumber: string;
   author?: string;
 }
 
@@ -28,34 +28,47 @@ export const getSnippetByNumber = async (number: string): Promise<Snippet> => {
   }
 };
 // uploadSnippet function (missing from the file)
-export const uploadSnippet = async (snippetData: SnippetInput): Promise<Snippet> => {
+export const uploadSnippet = async (
+  snippetData: SnippetInput
+): Promise<Snippet> => {
   try {
-    const response = await axios.post(`${API_URL}/snippets/upload`, snippetData);
+    console.log("Snippet data to upload:", snippetData);
+
+    const response = await axios.post(
+      `${API_URL}/snippets/upload`,
+      snippetData
+    );
     return response.data;
   } catch (error) {
-    console.error('Error uploading snippet:', error);
+    console.error("Error uploading snippet:", error);
     throw error;
   }
 };
 
 // addSnippet function (missing from the file)
-export const addSnippet = async (snippetData: SnippetInput): Promise<Snippet> => {
+export const addSnippet = async (
+  snippetData: SnippetInput
+): Promise<Snippet> => {
   try {
     const response = await axios.post(`${API_URL}/snippets/add`, snippetData);
     return response.data;
   } catch (error) {
-    console.error('Error adding snippet:', error);
+    console.error("Error adding snippet:", error);
     throw error;
   }
 };
 
 // getRecentSnippets function (missing from the file)
-export const getRecentSnippets = async (limit: number = 10): Promise<Snippet[]> => {
+export const getRecentSnippets = async (
+  limit: number = 10
+): Promise<Snippet[]> => {
   try {
-    const response = await axios.get(`${API_URL}/snippets/recent?limit=${limit}`);
+    const response = await axios.get(
+      `${API_URL}/snippets/recent?limit=${limit}`
+    );
     return response.data;
   } catch (error) {
-    console.error('Error fetching recent snippets:', error);
+    console.error("Error fetching recent snippets:", error);
     throw error;
   }
 };
